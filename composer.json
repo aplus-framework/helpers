@@ -1,0 +1,38 @@
+{
+  "name": "natanfelles/array_simple",
+  "description": "Works with PHP arrays using simple keys (strings with brackets)",
+  "type": "library",
+  "keywords": [
+    "array",
+    "simple",
+    "query",
+    "brackets",
+    "string"
+  ],
+  "homepage": "https://github.com/natanfelles/array_simple",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Natan Felles",
+      "email": "natanfelles@gmail.com",
+      "homepage": "https://natanfelles.github.io",
+      "role": "lead"
+    }
+  ],
+  "support": {
+    "issues": "https://github.com/natanfelles/array_simple/issues",
+    "wiki": "https://github.com/natanfelles/array_simple/wiki",
+    "source": "https://github.com/natanfelles/array_simple"
+  },
+  "require": {
+    "php": ">=7.0"
+  },
+  "require-dev": {
+    "phpunit/phpunit": "^7.0"
+  },
+  "autoload": {
+    "files": [
+      "src/array_simple.php"
+    ]
+  }
+}
