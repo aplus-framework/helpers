@@ -11,24 +11,24 @@
  */
 function array_simple_keys(array $array, string $simple_key = ''): array
 {
-	$keys = [];
+	$all_keys = [];
 
-	foreach ($array as $k => $value)
+	foreach ($array as $key => $value)
 	{
 		if (\is_array($value))
 		{
 			if ($simple_key === '')
 			{
-				$keys = \array_merge(
-					$keys,
-					\array_simple_keys($value, $k)
+				$all_keys = \array_merge(
+					$all_keys,
+					\array_simple_keys($value, $key)
 				);
 			}
 			else
 			{
-				$keys = \array_merge(
-					$keys,
-					\array_simple_keys($value, $simple_key . '[' . $k . ']')
+				$all_keys = \array_merge(
+					$all_keys,
+					\array_simple_keys($value, $simple_key . '[' . $key . ']')
 				);
 			}
 		}
@@ -36,16 +36,16 @@ function array_simple_keys(array $array, string $simple_key = ''): array
 		{
 			if ($simple_key === '')
 			{
-				$keys[] = $k;
+				$all_keys[] = $key;
 			}
 			else
 			{
-				$keys[] = $simple_key . '[' . $k . ']';
+				$all_keys[] = $simple_key . '[' . $key . ']';
 			}
 		}
 	}
 
-	return $keys;
+	return $all_keys;
 }
 
 /**
@@ -54,7 +54,7 @@ function array_simple_keys(array $array, string $simple_key = ''): array
  * @param string $simple_key A string in the simple key format.
  * @param array  $array      The array to search in.
  *
- * @return array|mixed|null The value of the simple key or null if not found.
+ * @return mixed|null The value of the simple key or null if not found.
  */
 function array_simple_value(string $simple_key, array $array)
 {
@@ -64,7 +64,7 @@ function array_simple_value(string $simple_key, array $array)
 	{
 		\preg_match_all('#\[(.*?)\]#', $simple_key, $matches);
 		$simple_key = \substr($simple_key, 0, $pos);
-		$value      = $array[$simple_key] ?? [];
+		$value      = $array[$simple_key] ?? null;
 
 		foreach ($matches[1] as $match)
 		{
