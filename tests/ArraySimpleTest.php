@@ -112,11 +112,11 @@ class ArraySimpleTest extends \PHPUnit\Framework\TestCase
 
 		$this->assertEquals('bbcb', \array_simple_value('b[b][c][b]', $this->array));
 
-		$this->assertEquals(null, \array_simple_value('a[x]', $this->array));
+		$this->assertNull(\array_simple_value('a[x]', $this->array));
 
-		$this->assertEquals(null, \array_simple_value('c', $this->array));
+		$this->assertNull(\array_simple_value('c', $this->array));
 
-		$this->assertEquals(null, \array_simple_value('z', []));
+		$this->assertNull(\array_simple_value('z', []));
 	}
 
 	public function testArraySimple()
