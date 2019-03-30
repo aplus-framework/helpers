@@ -1,38 +1,43 @@
 {
-  "name": "natanfelles/array_simple",
-  "description": "Works with PHP arrays using simple keys (strings with brackets)",
-  "type": "library",
-  "keywords": [
-    "array",
-    "simple",
-    "query",
-    "brackets",
-    "string"
-  ],
-  "homepage": "https://github.com/natanfelles/array_simple",
-  "license": "MIT",
-  "authors": [
-    {
-      "name": "Natan Felles",
-      "email": "natanfelles@gmail.com",
-      "homepage": "https://natanfelles.github.io",
-      "role": "lead"
-    }
-  ],
-  "support": {
-    "issues": "https://github.com/natanfelles/array_simple/issues",
-    "wiki": "https://github.com/natanfelles/array_simple/wiki",
-    "source": "https://github.com/natanfelles/array_simple"
-  },
-  "require": {
-    "php": ">=7.0"
-  },
-  "require-dev": {
-    "phpunit/phpunit": "^7.0"
-  },
-  "autoload": {
-    "files": [
-      "src/array_simple.php"
-    ]
-  }
+	"name": "natanfelles/array_simple",
+	"type": "library",
+	"description": "Works with PHP arrays using simple keys (strings with brackets)",
+	"keywords": [
+		"array",
+		"simple",
+		"query",
+		"brackets",
+		"string"
+	],
+	"homepage": "https://github.com/natanfelles/array_simple",
+	"license": "MIT",
+	"authors": [
+		{
+			"name": "Natan Felles",
+			"email": "natanfelles@gmail.com"
+		}
+	],
+	"require": {
+		"php": ">=7.3"
+	},
+	"require-dev": {
+		"ext-xdebug": "*",
+		"apigen/apigen": "dev-master#85290e8",
+		"friendsofphp/php-cs-fixer": "^2.14",
+		"localheinz/composer-normalize": "^1.1",
+		"phpmd/phpmd": "^2.6",
+		"phpstan/phpstan": "^0.11",
+		"phpunit/phpunit": "^7.5"
+	},
+	"minimum-stability": "dev",
+	"prefer-stable": true,
+	"autoload": {
+		"files": [
+			"src/array_simple.php"
+		]
+	},
+	"support": {
+		"issues": "https://github.com/natanfelles/array_simple/issues",
+		"source": "https://github.com/natanfelles/array_simple"
+	}
 }
