@@ -6,6 +6,20 @@
  * Licensed under the MIT license.
  */
 
+function array_simple_child_key(string $key) : string
+{
+	$pos_open = strpos($key, '[');
+	$pos_close = $pos_open ? strpos($key, ']') : false;
+	if ($pos_close === false || $pos_open > $pos_close) {
+		return '[' . $key . ']';
+	}
+	if ($pos_open !== 0) {
+		$key = explode('[', $key, 2);
+		$key = '[' . $key[0] . '][' . $key[1];
+	}
+	return $key;
+}
+
 /**
  * Get multidimensional array keys as simple keys.
  *
@@ -17,42 +31,20 @@
  */
 function array_simple_keys(array $array, string $simple_key = '') : array
 {
-	static $function_get_child;
-	if ($function_get_child === null) {
-		$function_get_child = function (string $key) : string {
-			$pos_open = strpos($key, '[');
-			$pos_close = $pos_open ? strpos($key, ']') : false;
-			if ($pos_open === false || $pos_close === false || $pos_open > $pos_close) {
-				return '[' . $key . ']';
-			}
-			if ($pos_open !== 0) {
-				$key = explode('[', $key, 2);
-				$key = '[' . $key[0] . '][' . $key[1];
-			}
-			return $key;
-		};
-	}
 	$all_keys = [];
 	foreach ($array as $key => $value) {
 		if (is_array($value)) {
-			if ($simple_key === '') {
-				$all_keys = array_merge(
+			$all_keys = $simple_key === ''
+				? array_merge($all_keys, array_simple_keys($value, $key))
+				: array_merge(
 					$all_keys,
-					array_simple_keys($value, $key)
+					array_simple_keys($value, $simple_key . array_simple_child_key($key))
 				);
-			} else {
-				$all_keys = array_merge(
-					$all_keys,
-					array_simple_keys($value, $simple_key . $function_get_child($key))
-				);
-			}
-		} else {
-			if ($simple_key === '') {
-				$all_keys[] = $key;
-			} else {
-				$all_keys[] = $simple_key . $function_get_child($key);
-			}
+			continue;
 		}
+		$all_keys[] = $simple_key === ''
+			? $key
+			: $simple_key . array_simple_child_key($key);
 	}
 	return $all_keys;
 }
@@ -71,14 +63,12 @@ function array_simple_value(string $simple_key, array $array)
 	$pos = strpos($simple_key, '[');
 	if ($pos && $pos < strpos($simple_key, ']')) {
 		preg_match_all('#\[(.*?)\]#', $simple_key, $matches);
-		$simple_key = substr($simple_key, 0, $pos);
-		$value = $array[$simple_key] ?? null;
+		$value = $array[substr($simple_key, 0, $pos)] ?? null;
 		foreach ($matches[1] as $match) {
-			if (is_array($value) && array_key_exists($match, $value)) {
-				$value = $value[$match];
-			} else {
+			if ( ! (is_array($value) && array_key_exists($match, $value))) {
 				return null;
 			}
+			$value = $value[$match];
 		}
 		return $value;
 	}
@@ -102,6 +92,17 @@ function array_simple(array $array) : array
 	return $data;
 }
 
+function array_add_child(array &$parent, array $childs, $value) : void
+{
+	$key = array_shift($childs);
+	$parent[$key] = [];
+	if ($childs === []) {
+		$parent[$key] = $value;
+		return;
+	}
+	array_add_child($parent[$key], $childs, $value);
+}
+
 /**
  * Converts an array with simple keys format into a PHP multidimensional array.
  *
@@ -111,45 +112,24 @@ function array_simple(array $array) : array
  */
 function array_simple_revert(array $array_simple) : array
 {
-	static $function_add_child;
-	if ($function_add_child === null) {
-		$function_add_child = function (
-			array &$array,
-			array $items,
-			$value,
-			callable $self
-		) : void {
-			$key = array_shift($items);
-			$array[$key] = [];
-			if ($items === []) {
-				$array[$key] = $value;
-				return;
-			}
-			$self($array[$key], $items, $value, $self);
-		};
-	}
 	$array = [];
 	foreach ($array_simple as $simple_key => $value) {
 		$pos_open = strpos($simple_key, '[');
 		$pos_close = $pos_open ? strpos($simple_key, ']') : false;
-		if ($pos_open === false || $pos_close === false || $pos_open > $pos_close) {
-			if (is_array($array_simple[$simple_key])) {
-				$value = array_simple_revert($array_simple[$simple_key]);
-			} else {
-				$value = $array_simple[$simple_key];
-			}
-			$array[$simple_key] = $value;
-		} elseif ($pos_open && $pos_open < $pos_close) {
-			preg_match_all('#\[(.*?)\]#', $simple_key, $matches);
-			$parent_key = substr($simple_key, 0, $pos_open);
-			$items = [$parent_key];
-			foreach ($matches[1] as $match) {
-				$items[] = $match === '' ? 0 : $match;
-			}
-			$tree = [];
-			$function_add_child($tree, $items, $value, $function_add_child);
-			$array = array_replace_recursive($array, $tree);
+		if ($pos_close === false || $pos_open > $pos_close) {
+			$array[$simple_key] = is_array($array_simple[$simple_key])
+				? array_simple_revert($array_simple[$simple_key])
+				: $array_simple[$simple_key];
+			continue;
 		}
+		preg_match_all('#\[(.*?)\]#', $simple_key, $matches);
+		$childs = [substr($simple_key, 0, $pos_open)];
+		foreach ($matches[1] as $match) {
+			$childs[] = $match === '' ? 0 : $match;
+		}
+		$parent = [];
+		array_add_child($parent, $childs, $value);
+		$array = array_replace_recursive($array, $parent);
 	}
 	return $array;
 }
