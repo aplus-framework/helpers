@@ -1,8 +1,8 @@
-# Array Simple 
+# Array Simple
 
 [![Build Status](https://travis-ci.org/natanfelles/array_simple.svg)](https://travis-ci.org/natanfelles/array_simple) [![Coverage Status](https://coveralls.io/repos/github/natanfelles/array_simple/badge.svg)](https://coveralls.io/github/natanfelles/array_simple)
 
-The [array_simple.php](https://github.com/natanfelles/array_simple/blob/master/src/array_simple.php) file contains three functions ([`array_simple_keys`](#array_simple_keys), [`array_simple_value`](#array_simple_value) and [`array_simple`](#array_simple)) that works with PHP arrays using *simple keys* (strings with brackets).
+The [array_simple.php](https://github.com/natanfelles/array_simple/blob/master/src/array_simple.php) file contains four functions ([`array_simple_keys`](#array_simple_keys), [`array_simple_value`](#array_simple_value), [`array_simple`](#array_simple) and [`array_simple_revert`](#array_simple_revert)) that works with [PHP arrays](https://www.php.net/manual/en/language.types.array.php) using *simple keys* (strings with brackets).
 
 ## Functions
 
@@ -34,7 +34,7 @@ $_POST = [
 	'masters' => [
 		'Siddhartha',
 		'Jesus',
-		'Muhammad'	
+		'Muhammad'
 	],
 	'student' => [
 		'name' => 'John Doe',
@@ -90,7 +90,7 @@ $_POST = [
 	'masters' => [
 		'Siddhartha',
 		'Jesus',
-		'Muhammad'	
+		'Muhammad'
 	],
 	'student' => [
 		'name' => 'John Doe',
@@ -130,7 +130,7 @@ $_POST = [
 	'masters' => [
 		'Siddhartha',
 		'Jesus',
-		'Muhammad'	
+		'Muhammad'
 	],
 	'student' => [
 		'name' => 'John Doe',
@@ -153,6 +153,64 @@ Array
     [masters[2]] => Muhammad
     [student[name]] => John Doe
     [student[age]] => 23
+)
+```
+
+---
+
+### array_simple_revert
+
+#### Description
+
+Converts an array with simple keys format into a PHP multidimensional array.
+
+```php
+array_simple_revert(array $array_simple): array
+```
+
+#### Parameters
+
+- **$array_simple** An array with simple keys.
+
+#### Return Values
+
+An array with native PHP array keys and their corresponding values.
+
+#### Examples
+
+```php
+<?php
+$_POST = [
+	'masters[0]' => 'Siddhartha',
+	'masters[1]' => 'Jesus',
+	'masters[2]' => 'Muhammad',
+	'student[name]' => 'John Doe',
+	'student[age]' => '23',
+];
+
+$simple = array_simple_revert($_POST);
+
+print_r($simple);
+```
+
+The above example will output:
+
+```
+Array
+(
+    [masters] => Array
+        (
+            [0] => Siddhartha
+            [1] => Jesus
+            [2] => Muhammad
+        )
+
+    [student] => Array
+        (
+            [name] => John Doe
+            [age] => 23
+        )
+
 )
 ```
 
