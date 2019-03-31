@@ -32,8 +32,8 @@
 	"minimum-stability": "dev",
 	"prefer-stable": true,
 	"autoload": {
-		"files": [
-			"src/array_simple.php"
+		"classmap": [
+			"src/ArraySimple.php"
 		]
 	},
 	"support": {
