@@ -8,6 +8,12 @@
 
 class ArraySimple
 {
+	protected static function extractKeys(string $simple_key) : array
+	{
+		preg_match_all('#\[(.*?)\]#', $simple_key, $matches);
+		return $matches[1] ?? [];
+	}
+
 	/**
 	 * Reverts from an array with simple keys to a PHP multidimensional array.
 	 *
@@ -19,21 +25,19 @@ class ArraySimple
 	{
 		$array = [];
 		foreach ($array_simple as $simple_key => $value) {
-			$pos_open = strpos($simple_key, '[');
-			$pos_close = $pos_open ? strpos($simple_key, ']') : false;
-			if ($pos_close === false || $pos_open > $pos_close) {
+			$parent_key = static::getParentKey($simple_key);
+			if ($parent_key === null) {
 				$array[$simple_key] = is_array($array_simple[$simple_key])
 					? static::revert($array_simple[$simple_key])
 					: $array_simple[$simple_key];
 				continue;
 			}
-			preg_match_all('#\[(.*?)\]#', $simple_key, $matches);
-			$childs = [substr($simple_key, 0, $pos_open)];
-			foreach ($matches[1] as $match) {
-				$childs[] = $match === '' ? 0 : $match;
-			}
 			$parent = [];
-			static::addChild($parent, $childs, $value);
+			static::addChild(
+				$parent,
+				array_merge([$parent_key], static::extractKeys($simple_key)),
+				$value
+			);
 			$array = array_replace_recursive($array, $parent);
 		}
 		return $array;
@@ -69,15 +73,14 @@ class ArraySimple
 	public static function value(string $simple_key, array $array)
 	{
 		$array = static::revert($array);
-		$pos = strpos($simple_key, '[');
-		if ($pos && $pos < strpos($simple_key, ']')) {
-			preg_match_all('#\[(.*?)\]#', $simple_key, $matches);
-			$value = $array[substr($simple_key, 0, $pos)] ?? null;
-			foreach ($matches[1] as $match) {
-				if ( ! (is_array($value) && array_key_exists($match, $value))) {
+		$parent_key = static::getParentKey($simple_key);
+		if ($parent_key) {
+			$value = $array[$parent_key] ?? null;
+			foreach (static::extractKeys($simple_key) as $key) {
+				if ( ! (is_array($value) && array_key_exists($key, $value))) {
 					return null;
 				}
-				$value = $value[$match];
+				$value = $value[$key];
 			}
 			return $value;
 		}
@@ -114,13 +117,13 @@ class ArraySimple
 					? array_merge($all_keys, static::getKeys($value, $key))
 					: array_merge(
 						$all_keys,
-						static::getKeys($value, $child_key . static::makeChildKey($key))
+						static::getKeys($value, $child_key . static::getChildKey($key))
 					);
 				continue;
 			}
 			$all_keys[] = $child_key === ''
 				? $key
-				: $child_key . static::makeChildKey($key);
+				: $child_key . static::getChildKey($key);
 		}
 		return $all_keys;
 	}
@@ -136,17 +139,24 @@ class ArraySimple
 		static::addChild($parent[$key], $childs, $value);
 	}
 
-	protected static function makeChildKey(string $key) : string
+	protected static function getParentKey(string $key) : ?string
 	{
 		$pos_open = strpos($key, '[');
 		$pos_close = $pos_open ? strpos($key, ']') : false;
 		if ($pos_close === false || $pos_open > $pos_close) {
+			return null;
+		}
+		return substr($key, 0, $pos_open);
+	}
+
+	protected static function getChildKey(string $key) : string
+	{
+		$parent_key = static::getParentKey($key);
+		if ($parent_key === null) {
 			return '[' . $key . ']';
 		}
-		if ($pos_open !== 0) {
-			$key = explode('[', $key, 2);
-			$key = '[' . $key[0] . '][' . $key[1];
-		}
+		$key = explode('[', $key, 2);
+		$key = '[' . $key[0] . '][' . $key[1];
 		return $key;
 	}
 }
