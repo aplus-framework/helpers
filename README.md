@@ -2,29 +2,27 @@
 
 [![Build Status](https://travis-ci.org/natanfelles/array_simple.svg)](https://travis-ci.org/natanfelles/array_simple) [![Coverage Status](https://coveralls.io/repos/github/natanfelles/array_simple/badge.svg)](https://coveralls.io/github/natanfelles/array_simple)
 
-The [array_simple.php](https://github.com/natanfelles/array_simple/blob/master/src/array_simple.php) file contains four functions ([`array_simple_keys`](#array_simple_keys), [`array_simple_value`](#array_simple_value), [`array_simple`](#array_simple) and [`array_simple_revert`](#array_simple_revert)) that works with [PHP arrays](https://www.php.net/manual/en/language.types.array.php) using *simple keys* (strings with brackets).
+The [ArraySimple](https://github.com/natanfelles/array_simple/blob/master/src/ArraySimple.php) class contains methods that work with [PHP arrays](https://www.php.net/manual/en/language.types.array.php) using *simple keys* (strings with brackets).
 
-## Functions
+## Methods
 
-### array_simple_keys
+### ArraySimple::keys
 
 #### Description
 
-Get multidimensional array keys as simple keys.
+Gets the keys of an array in the simple keys format.
 
 ```php
-array_simple_keys(array $array, string $simple_key = ''): array
+ArraySimple::keys(array $array): array
 ```
 
 #### Parameters
 
-- **$array** The array to get the simple keys.
-- **$simple_key** A simple key child. Used by the function itself to mount the keys recursively.
-
+- **$array** The array to get the simple keys
 
 #### Return Values
 
-An array containing the simple keys as values.
+An associative array containing the simple keys as values
 
 #### Examples
 
@@ -42,7 +40,7 @@ $_POST = [
 	],
 ];
 
-$keys = array_simple_keys($_POST);
+$keys = ArraySimple::keys($_POST);
 
 print_r($keys);
 ```
@@ -62,25 +60,25 @@ Array
 
 ---
 
-### array_simple_value
+### ArraySimple::value
 
 #### Description
 
-Get values by a simple key.
+Gets the value of an array item through a simple key.
 
 ```php
-array_simple_value(string $simple_key, array $array)
+ArraySimple::value(string $simple_key, array $array)
 ```
 
 #### Parameters
 
-- **$simple_key** A string in the simple key format.
-- **$array** The array to search in.
+- **$simple_key** A string in the simple key format
+- **$array** The array to search in
 
 
 #### Return Values
 
-The value of the simple key or `null` if not found.
+The item value or `null` if not found
 
 #### Examples
 
@@ -98,29 +96,29 @@ $_POST = [
 	],
 ];
 
-echo array_simple_value('student[name]', $_POST); // prints John Doe
+echo ArraySimple::value('student[name]', $_POST); // prints John Doe
 
 ```
 
 ---
 
-### array_simple
+### ArraySimple::convert
 
 #### Description
 
-Get an array with simple keys.
+Converts an array to an associative array with simple keys.
 
 ```php
-array_simple(array $array): array
+ArraySimple::convert(array $array): array
 ```
 
 #### Parameters
 
-- **$array** A multidimensional array to be converted into associative simple keys array.
+- **$array** Array to be converted
 
 #### Return Values
 
-An associative array with the simple keys as keys and their corresponding values.
+An associative array with the simple keys as keys and their corresponding values
 
 #### Examples
 
@@ -138,7 +136,7 @@ $_POST = [
 	],
 ];
 
-$simple = array_simple($_POST);
+$simple = ArraySimple::convert($_POST);
 
 print_r($simple);
 ```
@@ -158,23 +156,23 @@ Array
 
 ---
 
-### array_simple_revert
+### ArraySimple::revert
 
 #### Description
 
-Converts an array with simple keys format into a PHP multidimensional array.
+Reverts an associative array of simple keys to an native array.
 
 ```php
-array_simple_revert(array $array_simple): array
+ArraySimple::revert(array $array_simple): array
 ```
 
 #### Parameters
 
-- **$array_simple** An array with simple keys.
+- **$array_simple** An array with simple keys
 
 #### Return Values
 
-An array with native PHP array keys and their corresponding values.
+An array with native keys and their corresponding values
 
 #### Examples
 
@@ -188,7 +186,7 @@ $_POST = [
 	'student[age]' => '23',
 ];
 
-$simple = array_simple_revert($_POST);
+$simple = ArraySimple::revert($_POST);
 
 print_r($simple);
 ```

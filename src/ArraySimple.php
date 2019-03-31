@@ -6,6 +6,14 @@
  * Licensed under the MIT license.
  */
 
+/**
+ * Class ArraySimple.
+ *
+ * The ArraySimple class contains methods that work with PHP arrays using "simple keys" (strings
+ * with brackets).
+ *
+ * @see https://www.php.net/manual/en/language.types.array.php
+ */
 class ArraySimple
 {
 	protected static function extractKeys(string $simple_key) : array
@@ -15,11 +23,11 @@ class ArraySimple
 	}
 
 	/**
-	 * Reverts from an array with simple keys to a PHP multidimensional array.
+	 * Reverts an associative array of simple keys to an native array.
 	 *
 	 * @param array $array_simple An array with simple keys
 	 *
-	 * @return array An array with native PHP array keys and their corresponding values
+	 * @return array An array with native keys and their corresponding values
 	 */
 	public static function revert(array $array_simple) : array
 	{
@@ -44,10 +52,9 @@ class ArraySimple
 	}
 
 	/**
-	 * Converts an array to simple keys.
+	 * Converts an array to an associative array with simple keys.
 	 *
-	 * @param array $array A multidimensional array to be converted into associative simple keys
-	 *                     array
+	 * @param array $array Array to be converted
 	 *
 	 * @return array An associative array with the simple keys as keys and their corresponding
 	 *               values
@@ -63,12 +70,12 @@ class ArraySimple
 	}
 
 	/**
-	 * Get values by a simple key.
+	 * Gets the value of an array item through a simple key.
 	 *
 	 * @param string $simple_key A string in the simple key format
 	 * @param array  $array      The array to search in
 	 *
-	 * @return mixed|null The value of the simple key or null if not found
+	 * @return mixed|null The item value or null if not found
 	 */
 	public static function value(string $simple_key, array $array)
 	{
@@ -88,26 +95,17 @@ class ArraySimple
 	}
 
 	/**
-	 * Get multidimensional array keys as simple keys.
+	 * Gets the keys of an array in the simple keys format.
 	 *
 	 * @param array $array The array to get the simple keys
 	 *
-	 * @return array An array containing the simple keys as values
+	 * @return array An associative array containing the simple keys as values
 	 */
 	public static function keys(array $array) : array
 	{
 		return static::getKeys($array);
 	}
 
-	/**
-	 * Get multidimensional array keys as simple keys.
-	 *
-	 * @param array  $array     The array to get the simple keys
-	 * @param string $child_key A simple key child. Used by the function itself to mount the keys
-	 *                          recursively.
-	 *
-	 * @return array An array containing the simple keys as values
-	 */
 	protected static function getKeys(array $array, string $child_key = '') : array
 	{
 		$all_keys = [];
