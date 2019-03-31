@@ -4,6 +4,12 @@
 
 The [ArraySimple](https://github.com/natanfelles/array-simple/blob/master/src/ArraySimple.php) class contains methods that work with [PHP arrays](https://www.php.net/manual/en/language.types.array.php) using *simple keys* (strings with brackets).
 
+## Installation
+
+```
+composer require natanfelles/array-simple
+```
+
 ## Methods
 
 ### ArraySimple::keys
