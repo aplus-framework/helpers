@@ -1,7 +1,7 @@
 {
-	"name": "natanfelles/array_simple",
+	"name": "natanfelles/array-simple",
 	"type": "library",
-	"description": "Works with PHP arrays using simple keys (strings with brackets)",
+	"description": "The ArraySimple class contains methods that work with PHP arrays using \"simple keys\" (strings with brackets).",
 	"keywords": [
 		"array",
 		"simple",
@@ -9,7 +9,7 @@
 		"brackets",
 		"string"
 	],
-	"homepage": "https://github.com/natanfelles/array_simple",
+	"homepage": "https://github.com/natanfelles/array-simple",
 	"license": "MIT",
 	"authors": [
 		{
@@ -29,15 +29,15 @@
 		"phpstan/phpstan": "^0.11",
 		"phpunit/phpunit": "^7.5"
 	},
-	"minimum-stability": "dev",
-	"prefer-stable": true,
 	"autoload": {
 		"classmap": [
 			"src/ArraySimple.php"
 		]
 	},
+	"minimum-stability": "dev",
+	"prefer-stable": true,
 	"support": {
-		"issues": "https://github.com/natanfelles/array_simple/issues",
-		"source": "https://github.com/natanfelles/array_simple"
+		"issues": "https://github.com/natanfelles/array-simple/issues",
+		"source": "https://github.com/natanfelles/array-simple"
 	}
 }

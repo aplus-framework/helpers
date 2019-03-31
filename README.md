@@ -1,8 +1,8 @@
 # Array Simple
 
-[![Build Status](https://travis-ci.org/natanfelles/array_simple.svg)](https://travis-ci.org/natanfelles/array_simple) [![Coverage Status](https://coveralls.io/repos/github/natanfelles/array_simple/badge.svg)](https://coveralls.io/github/natanfelles/array_simple)
+[![Build Status](https://travis-ci.org/natanfelles/array-simple.svg)](https://travis-ci.org/natanfelles/array-simple) [![Coverage Status](https://coveralls.io/repos/github/natanfelles/array-simple/badge.svg)](https://coveralls.io/github/natanfelles/array-simple)
 
-The [ArraySimple](https://github.com/natanfelles/array_simple/blob/master/src/ArraySimple.php) class contains methods that work with [PHP arrays](https://www.php.net/manual/en/language.types.array.php) using *simple keys* (strings with brackets).
+The [ArraySimple](https://github.com/natanfelles/array-simple/blob/master/src/ArraySimple.php) class contains methods that work with [PHP arrays](https://www.php.net/manual/en/language.types.array.php) using *simple keys* (strings with brackets).
 
 ## Methods
 
