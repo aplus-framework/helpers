@@ -200,6 +200,7 @@ class ArraySimpleTest extends TestCase
 					'one' => 'f[two][one]',
 					1 => 'f[two][1]',
 				],
+				'g[' => 'f[g[]',
 			],
 		];
 		$array_simple = [
@@ -222,6 +223,7 @@ class ArraySimpleTest extends TestCase
 					'one' => 'f[two][one]',
 					'f[two][1]',
 				],
+				'g[' => 'f[g[]',
 			],
 		];
 		$this->assertEquals($array, ArraySimple::revert($array_simple));

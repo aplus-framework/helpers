@@ -35,9 +35,9 @@ class ArraySimple
 		foreach ($array_simple as $simple_key => $value) {
 			$parent_key = static::getParentKey($simple_key);
 			if ($parent_key === null) {
-				$array[$simple_key] = is_array($array_simple[$simple_key])
-					? static::revert($array_simple[$simple_key])
-					: $array_simple[$simple_key];
+				$array[$simple_key] = is_array($value)
+					? static::revert($value)
+					: $value;
 				continue;
 			}
 			$parent = [];
@@ -81,7 +81,7 @@ class ArraySimple
 	{
 		$array = static::revert($array);
 		$parent_key = static::getParentKey($simple_key);
-		if ($parent_key) {
+		if ($parent_key !== null) {
 			$value = $array[$parent_key] ?? null;
 			foreach (static::extractKeys($simple_key) as $key) {
 				if ( ! (is_array($value) && array_key_exists($key, $value))) {
