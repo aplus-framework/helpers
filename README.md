@@ -28,7 +28,7 @@ ArraySimple::keys(array $array): array
 
 #### Return Values
 
-An associative array containing the simple keys as values
+An indexed array containing the simple keys as values
 
 #### Examples
 

@@ -99,7 +99,7 @@ class ArraySimple
 	 *
 	 * @param array $array The array to get the simple keys
 	 *
-	 * @return array An associative array containing the simple keys as values
+	 * @return array An indexed array containing the simple keys as values
 	 */
 	public static function keys(array $array) : array
 	{
