@@ -140,8 +140,8 @@ class ArraySimple
 	protected static function getParentKey(string $key) : ?string
 	{
 		$pos_open = strpos($key, '[');
-		$pos_close = $pos_open ? strpos($key, ']') : false;
-		if ($pos_close === false || $pos_open > $pos_close) {
+		$pos_close = $pos_open ? strpos($key, ']', $pos_open) : false;
+		if ($pos_close === false) {
 			return null;
 		}
 		return substr($key, 0, $pos_open);
