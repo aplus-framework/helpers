@@ -12,7 +12,7 @@ class ArraySimpleTest extends TestCase
 {
 	protected array $array;
 
-	protected function setUp(): void
+	protected function setUp() : void
 	{
 		$this->array = [
 			'a' => [
