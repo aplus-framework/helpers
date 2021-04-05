@@ -18,15 +18,15 @@
 		}
 	],
 	"require": {
-		"php": ">=7.3"
+		"php": ">=8.0"
 	},
 	"require-dev": {
 		"ext-xdebug": "*",
-		"friendsofphp/php-cs-fixer": "^2.14",
-		"localheinz/composer-normalize": "^1.1",
-		"phpmd/phpmd": "^2.6",
-		"phpstan/phpstan": "^0.11",
-		"phpunit/phpunit": "^7.5"
+		"ergebnis/composer-normalize": "^2.0",
+		"natanfelles/coding-standard": "^1.1",
+		"phpmd/phpmd": "^2.9",
+		"phpstan/phpstan": "^0.12",
+		"phpunit/phpunit": "^9.3"
 	},
 	"autoload": {
 		"classmap": [
