@@ -1,11 +1,5 @@
 <?php
 
-/*
- * Copyright (C) 2018-2019 Natan Felles <natanfelles@gmail.com>
- *
- * Licensed under the MIT license.
- */
-
 /**
  * Class ArraySimple.
  *
