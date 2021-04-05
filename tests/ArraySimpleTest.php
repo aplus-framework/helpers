@@ -10,12 +10,9 @@ use PHPUnit\Framework\TestCase;
 
 class ArraySimpleTest extends TestCase
 {
-	/**
-	 * @var array
-	 */
-	protected $array;
+	protected array $array;
 
-	protected function setUp()
+	protected function setUp(): void
 	{
 		$this->array = [
 			'a' => [
