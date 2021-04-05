@@ -11,7 +11,7 @@ before_install:
 script:
   - composer normalize --dry-run --indent-size=1 --indent-style=tab
   - vendor/bin/php-cs-fixer fix --diff --dry-run --verbose
-  - vendor/bin/phpunit --verbose
+  - XDEBUG_MODE=coverage vendor/bin/phpunit --verbose
 
 after_success:
   - travis_retry php vendor/bin/php-coveralls -v -x build/coverage/clover.xml -o build/coveralls.json
