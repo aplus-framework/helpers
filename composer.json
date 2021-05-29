@@ -7,7 +7,8 @@
 		"simple",
 		"query",
 		"brackets",
-		"string"
+		"string",
+		"files"
 	],
 	"homepage": "https://github.com/natanfelles/array-simple",
 	"license": "MIT",
@@ -22,11 +23,16 @@
 	},
 	"require-dev": {
 		"ext-xdebug": "*",
-		"ergebnis/composer-normalize": "^2.0",
-		"natanfelles/coding-standard": "^1.1",
-		"phpmd/phpmd": "^2.9",
+		"ergebnis/composer-normalize": "^2.13",
+		"natanfelles/coding-standard": "^1.2",
+		"phpmd/phpmd": "^2.10",
 		"phpstan/phpstan": "^0.12",
-		"phpunit/phpunit": "^9.3"
+		"phpunit/phpunit": "^9.5"
+	},
+	"config": {
+		"optimize-autoloader": true,
+		"preferred-install": "dist",
+		"sort-packages": true
 	},
 	"autoload": {
 		"classmap": [
