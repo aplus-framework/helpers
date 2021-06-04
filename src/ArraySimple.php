@@ -69,9 +69,9 @@ class ArraySimple
 	 * @param string $simple_key A string in the simple key format
 	 * @param array  $array      The array to search in
 	 *
-	 * @return mixed|null The item value or null if not found
+	 * @return mixed The item value or null if not found
 	 */
-	public static function value(string $simple_key, array $array)
+	public static function value(string $simple_key, array $array) : mixed
 	{
 		$array = static::revert($array);
 		$parent_key = static::getParentKey($simple_key);
@@ -120,7 +120,7 @@ class ArraySimple
 		return $all_keys;
 	}
 
-	protected static function addChild(array &$parent, array $childs, $value) : void
+	protected static function addChild(array &$parent, array $childs, mixed $value) : void
 	{
 		$key = array_shift($childs);
 		$parent[$key] = [];
@@ -150,5 +150,55 @@ class ArraySimple
 		$key = explode('[', $key, 2);
 		$key = '[' . $key[0] . '][' . $key[1];
 		return $key;
+	}
+
+	/**
+	 * Get `$_FILES` in a re-organized way.
+	 *
+	 * NOTE: Do not use file input names as `name`, `type`, `tmp_name`, `error`
+	 * and `size` to avoid overwrite of arrays.
+	 *
+	 * @return array An array ready to be used with {@see ArraySimple::value}
+	 */
+	public static function files() : array
+	{
+		$files = [];
+		foreach ($_FILES as $name => $values) {
+			if ( ! isset($files[$name])) {
+				$files[$name] = [];
+			}
+			if ( ! is_array($values['error'])) {
+				$files[$name] = $values;
+				continue;
+			}
+			foreach ($values as $info_key => $sub_array) {
+				$files[$name] = array_replace_recursive(
+					$files[$name],
+					static::filesWalker($sub_array, $info_key)
+				);
+			}
+		}
+		return $files;
+	}
+
+	/**
+	 * @see https://stackoverflow.com/a/33261775/6027968
+	 *
+	 * @param array  $array
+	 * @param string $info_key
+	 *
+	 * @return array
+	 */
+	protected static function filesWalker(array $array, string $info_key) : array
+	{
+		$return = [];
+		foreach ($array as $key => $value) {
+			if (is_array($value)) {
+				$return[$key] = static::filesWalker($value, $info_key);
+				continue;
+			}
+			$return[$key][$info_key] = $value;
+		}
+		return $return;
 	}
 }

@@ -219,4 +219,100 @@ class ArraySimpleTest extends TestCase
 		];
 		$this->assertEquals($array, ArraySimple::revert($array_simple));
 	}
+
+	public function testArraySimpleFiles()
+	{
+		$_FILES = [
+			'party' => [
+				'name' => [
+					1 => [
+						'aa' => [
+							0 => 'Blue Sky.png',
+							1 => '',
+						],
+					],
+					2 => 'music.png',
+				],
+				'type' => [
+					1 => [
+						'aa' => [
+							0 => 'image/png',
+							1 => '',
+						],
+					],
+					2 => 'image/png',
+				],
+				'tmp_name' => [
+					1 => [
+						'aa' => [
+							0 => '/tmp/phpP0AhMI',
+							1 => '',
+						],
+					],
+					2 => '/tmp/phpK5PJNm',
+				],
+				'error' => [
+					1 => [
+						'aa' => [
+							0 => 0,
+							1 => 4,
+						],
+					],
+					2 => 0,
+				],
+				'size' => [
+					1 => [
+						'aa' => [
+							0 => 41706,
+							1 => 0,
+						],
+					],
+					2 => 62820,
+				],
+			],
+			'foo' => [
+				'name' => 'Bar.jpg',
+				'type' => 'image/jpeg',
+				'tmp_name' => '/tmp/phpS7OLMn',
+				'error' => 0,
+				'size' => 10663,
+			],
+		];
+		$this->assertEquals([
+			'party' => [
+				1 => [
+					'aa' => [
+						0 => [
+							'name' => 'Blue Sky.png',
+							'type' => 'image/png',
+							'tmp_name' => '/tmp/phpP0AhMI',
+							'error' => 0,
+							'size' => 41706,
+						],
+						1 => [
+							'name' => '',
+							'type' => '',
+							'tmp_name' => '',
+							'error' => 4,
+							'size' => 0,
+						],
+					],
+				],
+				2 => [
+					'name' => 'music.png',
+					'type' => 'image/png',
+					'tmp_name' => '/tmp/phpK5PJNm',
+					'error' => 0,
+					'size' => 62820,
+				],
+			],
+			'foo' => [
+				'name' => 'Bar.jpg',
+				'type' => 'image/jpeg',
+				'tmp_name' => '/tmp/phpS7OLMn',
+				'error' => 0,
+				'size' => 10663,
+			],
+		], ArraySimple::files());
+	}
 }

@@ -2,7 +2,9 @@
 
 [![Build Status](https://travis-ci.org/natanfelles/array-simple.svg)](https://travis-ci.org/natanfelles/array-simple) [![Coverage Status](https://coveralls.io/repos/github/natanfelles/array-simple/badge.svg)](https://coveralls.io/github/natanfelles/array-simple)
 
-The [ArraySimple](https://github.com/natanfelles/array-simple/blob/master/src/ArraySimple.php) class contains methods that work with [PHP arrays](https://www.php.net/manual/en/language.types.array.php) using *simple keys* (strings with brackets).
+The [ArraySimple](https://github.com/natanfelles/array-simple/blob/master/src/ArraySimple.php) class
+contains methods that work with [PHP arrays](https://www.php.net/manual/en/language.types.array.php)
+using *simple keys* (strings with brackets).
 
 ## Installation
 
@@ -80,7 +82,6 @@ ArraySimple::value(string $simple_key, array $array)
 
 - **$simple_key** A string in the simple key format
 - **$array** The array to search in
-
 
 #### Return Values
 
@@ -218,3 +219,127 @@ Array
 )
 ```
 
+---
+
+### ArraySimple::files
+
+#### Description
+
+Get `$_FILES` in a re-organized way.
+
+```php
+ArraySimple::files(): array
+```
+
+#### Return Values
+
+An array ready to be used with [ArraySimple::value](#arraysimplevalue)
+
+#### Examples
+
+```php
+<?php
+$_FILES = [
+	'party' => [
+				'name' => [
+					1 => [
+						'aa' => [
+							0 => 'Blue Sky.png',
+							1 => '',
+						],
+					],
+					2 => 'music.png',
+				],
+				'type' => [
+					1 => [
+						'aa' => [
+							0 => 'image/png',
+							1 => '',
+						],
+					],
+					2 => 'image/png',
+				],
+				'tmp_name' => [
+					1 => [
+						'aa' => [
+							0 => '/tmp/phpP0AhMI',
+							1 => '',
+						],
+					],
+					2 => '/tmp/phpK5PJNm',
+				],
+				'error' => [
+					1 => [
+						'aa' => [
+							0 => 0,
+							1 => 4,
+						],
+					],
+					2 => 0,
+				],
+				'size' => [
+					1 => [
+						'aa' => [
+							0 => 41706,
+							1 => 0,
+						],
+					],
+					2 => 62820,
+				],
+			]
+];
+
+$files = ArraySimple::files();
+
+print_r($files);
+```
+
+The above example will output:
+
+```
+Array
+(
+    [party] => Array
+        (
+            [1] => Array
+                (
+                    [aa] => Array
+                        (
+                            [0] => Array
+                                (
+                                    [name] => Blue Sky.png
+                                    [type] => image/png
+                                    [tmp_name] => /tmp/phpP0AhMI
+                                    [error] => 0
+                                    [size] => 41706
+                                )
+
+                            [1] => Array
+                                (
+                                    [name] => 
+                                    [type] => 
+                                    [tmp_name] => 
+                                    [error] => 4
+                                    [size] => 0
+                                )
+
+                        )
+
+                )
+
+            [2] => Array
+                (
+                    [name] => music.png
+                    [type] => image/png
+                    [tmp_name] => /tmp/phpK5PJNm
+                    [error] => 0
+                    [size] => 62820
+                )
+
+        )
+
+)
+```
+
+> NOTE: Do not use file input names as `name`, `type`, `tmp_name`, `error` and
+> `size` to avoid overwrite of arrays.
