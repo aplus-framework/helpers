@@ -240,53 +240,53 @@ An array ready to be used with [ArraySimple::value](#arraysimplevalue)
 ```php
 <?php
 $_FILES = [
-	'party' => [
-				'name' => [
-					1 => [
-						'aa' => [
-							0 => 'Blue Sky.png',
-							1 => '',
-						],
-					],
-					2 => 'music.png',
-				],
-				'type' => [
-					1 => [
-						'aa' => [
-							0 => 'image/png',
-							1 => '',
-						],
-					],
-					2 => 'image/png',
-				],
-				'tmp_name' => [
-					1 => [
-						'aa' => [
-							0 => '/tmp/phpP0AhMI',
-							1 => '',
-						],
-					],
-					2 => '/tmp/phpK5PJNm',
-				],
-				'error' => [
-					1 => [
-						'aa' => [
-							0 => 0,
-							1 => 4,
-						],
-					],
-					2 => 0,
-				],
-				'size' => [
-					1 => [
-						'aa' => [
-							0 => 41706,
-							1 => 0,
-						],
-					],
-					2 => 62820,
-				],
-			]
+    'party' => [
+        'name' => [
+            1 => [
+                'aa' => [
+                    0 => 'Blue Sky.png',
+                    1 => '',
+                ],
+            ],
+            2 => 'music.png',
+        ],
+        'type' => [
+            1 => [
+                'aa' => [
+                    0 => 'image/png',
+                    1 => '',
+                ],
+            ],
+            2 => 'image/png',
+        ],
+        'tmp_name' => [
+            1 => [
+                'aa' => [
+                    0 => '/tmp/phpP0AhMI',
+                    1 => '',
+                ],
+            ],
+            2 => '/tmp/phpK5PJNm',
+        ],
+        'error' => [
+            1 => [
+                'aa' => [
+                    0 => 0,
+                    1 => 4,
+                ],
+            ],
+            2 => 0,
+        ],
+        'size' => [
+            1 => [
+                'aa' => [
+                    0 => 41706,
+                    1 => 0,
+                ],
+            ],
+            2 => 62820,
+        ],
+    ]
 ];
 
 $files = ArraySimple::files();
