@@ -5,13 +5,23 @@ use JetBrains\PhpStorm\Pure;
 /**
  * Class ArraySimple.
  *
- * The ArraySimple class contains methods that work with PHP arrays using "simple keys" (strings
- * with brackets).
+ * Contains methods to work with PHP arrays using "simple keys" (strings with
+ * square brackets).
+ *
+ * Simple key format example: `parent[child1][child2]`.
+ *
+ * `user[country][state]` gets 'rs' in
+ * `array('user' => ['country' => ['state' => 'rs']])`
  *
  * @see https://www.php.net/manual/en/language.types.array.php
  */
 class ArraySimple
 {
+	/**
+	 * @param string $simple_key
+	 *
+	 * @return array<int,string>
+	 */
 	protected static function extractKeys(string $simple_key) : array
 	{
 		preg_match_all('#\[(.*?)\]#', $simple_key, $matches);
@@ -21,9 +31,9 @@ class ArraySimple
 	/**
 	 * Reverts an associative array of simple keys to an native array.
 	 *
-	 * @param array $array_simple An array with simple keys
+	 * @param array<int|string,mixed> $array_simple An array with simple keys
 	 *
-	 * @return array An array with native keys and their corresponding values
+	 * @return array<string,mixed> An array with their corresponding values
 	 */
 	public static function revert(array $array_simple) : array
 	{
@@ -51,10 +61,10 @@ class ArraySimple
 	/**
 	 * Converts an array to an associative array with simple keys.
 	 *
-	 * @param array $array Array to be converted
+	 * @param array<int|string,mixed> $array Array to be converted
 	 *
-	 * @return array An associative array with the simple keys as keys and their corresponding
-	 *               values
+	 * @return array<string,mixed> An associative array with the simple keys as
+	 * keys and their corresponding values
 	 */
 	public static function convert(array $array) : array
 	{
@@ -70,7 +80,7 @@ class ArraySimple
 	 * Gets the value of an array item through a simple key.
 	 *
 	 * @param string $simple_key A string in the simple key format
-	 * @param array  $array      The array to search in
+	 * @param array<int|string,mixed> $array The array to search in
 	 *
 	 * @return mixed The item value or null if not found
 	 */
@@ -94,9 +104,10 @@ class ArraySimple
 	/**
 	 * Gets the keys of an array in the simple keys format.
 	 *
-	 * @param array $array The array to get the simple keys
+	 * @param array<int|string,mixed> $array The array to get the simple keys
 	 *
-	 * @return array An indexed array containing the simple keys as values
+	 * @return array<int,string> An indexed array containing the simple keys as
+	 * values
 	 */
 	#[Pure]
 	public static function keys(array $array) : array
@@ -104,6 +115,12 @@ class ArraySimple
 		return static::getKeys($array);
 	}
 
+	/**
+	 * @param array<int|string,mixed> $array
+	 * @param string $child_key
+	 *
+	 * @return array<int,string>
+	 */
 	#[Pure]
 	protected static function getKeys(array $array, string $child_key = '') : array
 	{
@@ -126,6 +143,11 @@ class ArraySimple
 		return $all_keys;
 	}
 
+	/**
+	 * @param array<int,string> $parent
+	 * @param array<int,string> $childs
+	 * @param mixed $value
+	 */
 	protected static function addChild(array &$parent, array $childs, mixed $value) : void
 	{
 		$key = array_shift($childs);
@@ -162,12 +184,13 @@ class ArraySimple
 	}
 
 	/**
-	 * Get `$_FILES` in a re-organized way.
+	 * Get $_FILES in a re-organized way.
 	 *
 	 * NOTE: Do not use file input names as `name`, `type`, `tmp_name`, `error`
 	 * and `size` to avoid overwrite of arrays.
 	 *
-	 * @return array An array ready to be used with {@see ArraySimple::value}
+	 * @return array<string,mixed> An array ready to be used with
+	 * {@see ArraySimple::value()}
 	 */
 	#[Pure]
 	public static function files() : array
@@ -194,16 +217,17 @@ class ArraySimple
 	/**
 	 * @see https://stackoverflow.com/a/33261775/6027968
 	 *
-	 * @param array  $array
+	 * @param array<int|string,mixed> $array
 	 * @param string $info_key
 	 *
-	 * @return array
+	 * @return array<string,mixed>
 	 */
 	#[Pure]
 	protected static function filesWalker(array $array, string $info_key) : array
 	{
 		$return = [];
 		foreach ($array as $key => $value) {
+			$key = (string) $key;
 			if (is_array($value)) {
 				$return[$key] = static::filesWalker($value, $info_key);
 				continue;
