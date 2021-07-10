@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 use Framework\CodingStandard\Config;
 use Framework\CodingStandard\Finder;

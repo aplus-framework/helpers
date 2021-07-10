@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 use JetBrains\PhpStorm\Pure;
 
@@ -29,6 +29,7 @@ class ArraySimple
 	{
 		$array = [];
 		foreach ($array_simple as $simple_key => $value) {
+			$simple_key = (string) $simple_key;
 			$parent_key = static::getParentKey($simple_key);
 			if ($parent_key === null) {
 				$array[$simple_key] = is_array($value)
@@ -108,6 +109,7 @@ class ArraySimple
 	{
 		$all_keys = [];
 		foreach ($array as $key => $value) {
+			$key = (string) $key;
 			if (is_array($value)) {
 				$all_keys = $child_key === ''
 					? array_merge($all_keys, static::getKeys($value, $key))
@@ -127,6 +129,7 @@ class ArraySimple
 	protected static function addChild(array &$parent, array $childs, mixed $value) : void
 	{
 		$key = array_shift($childs);
+		$key = (string) $key;
 		$parent[$key] = [];
 		if ($childs === []) {
 			$parent[$key] = $value;
@@ -143,7 +146,7 @@ class ArraySimple
 		if ($pos_close === false) {
 			return null;
 		}
-		return substr($key, 0, $pos_open);
+		return substr($key, 0, $pos_open); // @phpstan-ignore-line
 	}
 
 	#[Pure]
