@@ -7,6 +7,8 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
+namespace Framework\Helpers;
+
 use JetBrains\PhpStorm\Pure;
 
 /**
@@ -31,7 +33,7 @@ class ArraySimple
 	 */
 	protected static function extractKeys(string $simple_key) : array
 	{
-		preg_match_all('#\[(.*?)\]#', $simple_key, $matches);
+		\preg_match_all('#\[(.*?)\]#', $simple_key, $matches);
 		return $matches[1] ?? [];
 	}
 
@@ -49,7 +51,7 @@ class ArraySimple
 			$simple_key = (string) $simple_key;
 			$parent_key = static::getParentKey($simple_key);
 			if ($parent_key === null) {
-				$array[$simple_key] = is_array($value)
+				$array[$simple_key] = \is_array($value)
 					? static::revert($value)
 					: $value;
 				continue;
@@ -57,10 +59,10 @@ class ArraySimple
 			$parent = [];
 			static::addChild(
 				$parent,
-				array_merge([$parent_key], static::extractKeys($simple_key)),
+				\array_merge([$parent_key], static::extractKeys($simple_key)),
 				$value
 			);
-			$array = array_replace_recursive($array, $parent);
+			$array = \array_replace_recursive($array, $parent);
 		}
 		return $array;
 	}
@@ -100,7 +102,7 @@ class ArraySimple
 		}
 		$value = $array[$parent_key] ?? null;
 		foreach (static::extractKeys($simple_key) as $key) {
-			if ( ! (is_array($value) && array_key_exists($key, $value))) {
+			if ( ! (\is_array($value) && \array_key_exists($key, $value))) {
 				return null;
 			}
 			$value = $value[$key];
@@ -134,10 +136,10 @@ class ArraySimple
 		$all_keys = [];
 		foreach ($array as $key => $value) {
 			$key = (string) $key;
-			if (is_array($value)) {
+			if (\is_array($value)) {
 				$all_keys = $child_key === ''
-					? array_merge($all_keys, static::getKeys($value, $key))
-					: array_merge(
+					? \array_merge($all_keys, static::getKeys($value, $key))
+					: \array_merge(
 						$all_keys,
 						static::getKeys($value, $child_key . static::getChildKey($key))
 					);
@@ -157,7 +159,7 @@ class ArraySimple
 	 */
 	protected static function addChild(array &$parent, array $childs, mixed $value) : void
 	{
-		$key = array_shift($childs);
+		$key = \array_shift($childs);
 		$key = (string) $key;
 		$parent[$key] = [];
 		if ($childs === []) {
@@ -170,12 +172,12 @@ class ArraySimple
 	#[Pure]
 	protected static function getParentKey(string $key) : ?string
 	{
-		$pos_open = strpos($key, '[');
-		$pos_close = $pos_open ? strpos($key, ']', $pos_open) : false;
+		$pos_open = \strpos($key, '[');
+		$pos_close = $pos_open ? \strpos($key, ']', $pos_open) : false;
 		if ($pos_close === false) {
 			return null;
 		}
-		return substr($key, 0, $pos_open); // @phpstan-ignore-line
+		return \substr($key, 0, $pos_open); // @phpstan-ignore-line
 	}
 
 	#[Pure]
@@ -185,7 +187,7 @@ class ArraySimple
 		if ($parent_key === null) {
 			return '[' . $key . ']';
 		}
-		$key = explode('[', $key, 2);
+		$key = \explode('[', $key, 2);
 		$key = '[' . $key[0] . '][' . $key[1];
 		return $key;
 	}
@@ -207,12 +209,12 @@ class ArraySimple
 			if ( ! isset($files[$name])) {
 				$files[$name] = [];
 			}
-			if ( ! is_array($values['error'])) {
+			if ( ! \is_array($values['error'])) {
 				$files[$name] = $values;
 				continue;
 			}
 			foreach ($values as $info_key => $sub_array) {
-				$files[$name] = array_replace_recursive(
+				$files[$name] = \array_replace_recursive(
 					$files[$name],
 					static::filesWalker($sub_array, $info_key)
 				);
@@ -235,7 +237,7 @@ class ArraySimple
 		$return = [];
 		foreach ($array as $key => $value) {
 			$key = (string) $key;
-			if (is_array($value)) {
+			if (\is_array($value)) {
 				$return[$key] = static::filesWalker($value, $info_key);
 				continue;
 			}

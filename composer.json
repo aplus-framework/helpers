@@ -38,9 +38,14 @@
 		"sort-packages": true
 	},
 	"autoload": {
-		"classmap": [
-			"src/ArraySimple.php"
-		]
+		"psr-4": {
+			"Framework\\Helpers\\": "src/"
+		}
+	},
+	"autoload-dev": {
+		"psr-4": {
+			"Tests\\Helpers\\": "tests/"
+		}
 	},
 	"minimum-stability": "dev",
 	"prefer-stable": true,
