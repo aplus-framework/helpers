@@ -77,17 +77,17 @@ class ArraySimple
 	{
 		$array = static::revert($array);
 		$parent_key = static::getParentKey($simple_key);
-		if ($parent_key !== null) {
-			$value = $array[$parent_key] ?? null;
-			foreach (static::extractKeys($simple_key) as $key) {
-				if ( ! (is_array($value) && array_key_exists($key, $value))) {
-					return null;
-				}
-				$value = $value[$key];
-			}
-			return $value;
+		if ($parent_key === null) {
+			return $array[$simple_key] ?? null;
 		}
-		return $array[$simple_key] ?? null;
+		$value = $array[$parent_key] ?? null;
+		foreach (static::extractKeys($simple_key) as $key) {
+			if ( ! (is_array($value) && array_key_exists($key, $value))) {
+				return null;
+			}
+			$value = $value[$key];
+		}
+		return $value;
 	}
 
 	/**
