@@ -3,12 +3,7 @@
 	"type": "library",
 	"description": "The Framework Helpers Library",
 	"keywords": [
-		"array",
-		"simple",
-		"query",
-		"square",
-		"brackets",
-		"string",
+		"array-simple",
 		"files"
 	],
 	"homepage": "https://the-framework.gitlab.io/libraries/helpers.html",
