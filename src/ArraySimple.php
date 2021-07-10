@@ -1,5 +1,7 @@
 <?php
 
+use JetBrains\PhpStorm\Pure;
+
 /**
  * Class ArraySimple.
  *
@@ -95,11 +97,13 @@ class ArraySimple
 	 *
 	 * @return array An indexed array containing the simple keys as values
 	 */
+	#[Pure]
 	public static function keys(array $array) : array
 	{
 		return static::getKeys($array);
 	}
 
+	#[Pure]
 	protected static function getKeys(array $array, string $child_key = '') : array
 	{
 		$all_keys = [];
@@ -131,6 +135,7 @@ class ArraySimple
 		static::addChild($parent[$key], $childs, $value);
 	}
 
+	#[Pure]
 	protected static function getParentKey(string $key) : ?string
 	{
 		$pos_open = strpos($key, '[');
@@ -141,6 +146,7 @@ class ArraySimple
 		return substr($key, 0, $pos_open);
 	}
 
+	#[Pure]
 	protected static function getChildKey(string $key) : string
 	{
 		$parent_key = static::getParentKey($key);
@@ -160,6 +166,7 @@ class ArraySimple
 	 *
 	 * @return array An array ready to be used with {@see ArraySimple::value}
 	 */
+	#[Pure]
 	public static function files() : array
 	{
 		$files = [];
@@ -189,6 +196,7 @@ class ArraySimple
 	 *
 	 * @return array
 	 */
+	#[Pure]
 	protected static function filesWalker(array $array, string $info_key) : array
 	{
 		$return = [];
