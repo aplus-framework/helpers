@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 /*
- * This file is part of ArraySimple Library.
+ * This file is part of The Framework ArraySimple Library.
  *
  * (c) Natan Felles <natanfelles@gmail.com>
  *
@@ -12,4 +12,4 @@ use Framework\CodingStandard\Finder;
 
 return (new Config())->setFinder(
 	Finder::create()->in(__DIR__)
-)->setDefaultHeaderComment('ArraySimple Library');
+)->setDefaultHeaderComment('The Framework ArraySimple Library');
