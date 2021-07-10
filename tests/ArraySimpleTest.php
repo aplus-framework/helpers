@@ -9,7 +9,10 @@
  */
 use PHPUnit\Framework\TestCase;
 
-class ArraySimpleTest extends TestCase
+/**
+ * Class ArraySimpleTest.
+ */
+final class ArraySimpleTest extends TestCase
 {
 	/**
 	 * @var array[]
@@ -53,7 +56,7 @@ class ArraySimpleTest extends TestCase
 
 	public function testArraySimpleKeys() : void
 	{
-		$this->assertEquals([
+		self::assertSame([
 			'a[a][a]',
 			'a[a][b]',
 			'a[b][a]',
@@ -68,7 +71,7 @@ class ArraySimpleTest extends TestCase
 			'b[b][c][a]',
 			'b[b][c][b]',
 		], ArraySimple::keys($this->array));
-		$this->assertEquals([
+		self::assertSame([
 			'a[a]',
 			'a[b]',
 			'b[a]',
@@ -77,19 +80,19 @@ class ArraySimpleTest extends TestCase
 			'b[c][b]',
 			'b[c][c][a]',
 		], ArraySimple::keys($this->array['a']));
-		$this->assertEquals([
+		self::assertSame([
 			'a',
 			'b',
 			'c[a]',
 			'c[b]',
 			'c[c][a]',
 		], ArraySimple::keys($this->array['a']['b']));
-		$this->assertEquals([], ArraySimple::keys([]));
+		self::assertSame([], ArraySimple::keys([]));
 	}
 
 	public function testArraySimpleValue() : void
 	{
-		$this->assertEquals([
+		self::assertSame([
 			'a' => [
 				'a' => 'aaa',
 				'b' => 'aab',
@@ -106,7 +109,7 @@ class ArraySimpleTest extends TestCase
 				],
 			],
 		], ArraySimple::value('a', $this->array));
-		$this->assertEquals([
+		self::assertSame([
 			'a' => 'aba',
 			'b' => 'abb',
 			'c' => [
@@ -117,24 +120,24 @@ class ArraySimpleTest extends TestCase
 				],
 			],
 		], ArraySimple::value('a[b]', $this->array));
-		$this->assertEquals([
+		self::assertSame([
 			'a' => 'abca',
 			'b' => 'abcb',
 			'c' => [
 				'a' => 'abcca',
 			],
 		], ArraySimple::value('a[b][c]', $this->array));
-		$this->assertEquals('abca', ArraySimple::value('a[b][c][a]', $this->array));
-		$this->assertEquals('abcca', ArraySimple::value('a[b][c][c][a]', $this->array));
-		$this->assertEquals('bbcb', ArraySimple::value('b[b][c][b]', $this->array));
-		$this->assertNull(ArraySimple::value('a[x]', $this->array));
-		$this->assertNull(ArraySimple::value('c', $this->array));
-		$this->assertNull(ArraySimple::value('z', []));
+		self::assertSame('abca', ArraySimple::value('a[b][c][a]', $this->array));
+		self::assertSame('abcca', ArraySimple::value('a[b][c][c][a]', $this->array));
+		self::assertSame('bbcb', ArraySimple::value('b[b][c][b]', $this->array));
+		self::assertNull(ArraySimple::value('a[x]', $this->array));
+		self::assertNull(ArraySimple::value('c', $this->array));
+		self::assertNull(ArraySimple::value('z', []));
 	}
 
 	public function testArraySimpleConvert() : void
 	{
-		$this->assertEquals([
+		self::assertSame([
 			'a[a][a]' => 'aaa',
 			'a[a][b]' => 'aab',
 			'a[b][a]' => 'aba',
@@ -149,7 +152,7 @@ class ArraySimpleTest extends TestCase
 			'b[b][c][a]' => 'bbca',
 			'b[b][c][b]' => 'bbcb',
 		], ArraySimple::convert($this->array));
-		$this->assertEquals([
+		self::assertSame([
 			'a[a]' => 'aaa',
 			'a[b]' => 'aab',
 			'b[a]' => 'aba',
@@ -158,13 +161,13 @@ class ArraySimpleTest extends TestCase
 			'b[c][b]' => 'abcb',
 			'b[c][c][a]' => 'abcca',
 		], ArraySimple::convert($this->array['a']));
-		$this->assertEquals([
+		self::assertSame([
 			'a' => 'bba',
 			'b' => 'bbb',
 			'c[a]' => 'bbca',
 			'c[b]' => 'bbcb',
 		], ArraySimple::convert($this->array['b']['b']));
-		$this->assertEquals([], ArraySimple::convert([]));
+		self::assertSame([], ArraySimple::convert([]));
 	}
 
 	public function testArraySimpleRevert() : void
@@ -227,7 +230,7 @@ class ArraySimpleTest extends TestCase
 				'g[' => 'f[g[]',
 			],
 		];
-		$this->assertEquals($array, ArraySimple::revert($array_simple));
+		self::assertSame($array, ArraySimple::revert($array_simple));
 	}
 
 	public function testArraySimpleFiles() : void
@@ -288,7 +291,7 @@ class ArraySimpleTest extends TestCase
 				'size' => 10663,
 			],
 		];
-		$this->assertEquals([
+		self::assertSame([
 			'party' => [
 				1 => [
 					'aa' => [
