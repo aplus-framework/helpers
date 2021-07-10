@@ -1,16 +1,17 @@
 {
 	"name": "natanfelles/array-simple",
 	"type": "library",
-	"description": "The ArraySimple class contains methods that work with PHP arrays using \"simple keys\" (strings with brackets).",
+	"description": "The Framework ArraySimple Library",
 	"keywords": [
 		"array",
 		"simple",
 		"query",
+		"square",
 		"brackets",
 		"string",
 		"files"
 	],
-	"homepage": "https://github.com/natanfelles/array-simple",
+	"homepage": "https://the-framework.gitlab.io/libraries/array-simple.html",
 	"license": "MIT",
 	"authors": [
 		{
@@ -44,7 +45,10 @@
 	"minimum-stability": "dev",
 	"prefer-stable": true,
 	"support": {
-		"issues": "https://github.com/natanfelles/array-simple/issues",
-		"source": "https://github.com/natanfelles/array-simple"
+		"email": "natanfelles@gmail.com",
+		"issues": "https://gitlab.com/the-framework/libraries/array-simple/issues",
+		"wiki": "https://gitlab.com/the-framework/libraries/array-simple/wikis/home",
+		"source": "https://gitlab.com/the-framework/libraries/array-simple",
+		"docs": "https://the-framework.gitlab.io/libraries/array-simple/docs/"
 	}
 }
