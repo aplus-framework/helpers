@@ -1,4 +1,4 @@
-# The Framework ArraySimple Library
+# The Framework Helpers Library
 
 - [Homepage](https://the-framework.gitlab.io/libraries/array-simple.html)
 - [API Documentation](https://the-framework.gitlab.io/libraries/array-simple/docs/)

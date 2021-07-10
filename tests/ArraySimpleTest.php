@@ -1,6 +1,6 @@
 <?php
 /*
- * This file is part of The Framework ArraySimple Library.
+ * This file is part of The Framework Helpers Library.
  *
  * (c) Natan Felles <natanfelles@gmail.com>
  *

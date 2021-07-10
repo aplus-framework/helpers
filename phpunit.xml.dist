@@ -14,7 +14,7 @@
 			<text outputFile="php://stdout"/>
 		</report>
 	</coverage>
-	<testsuite name="Array Simple Tests">
+	<testsuite name="Helpers tests">
 		<directory suffix="Test.php">tests</directory>
 	</testsuite>
 	<logging/>
