@@ -48,7 +48,7 @@ class ArraySimpleTest extends TestCase
 		];
 	}
 
-	public function testArraySimpleKeys()
+	public function testArraySimpleKeys() : void
 	{
 		$this->assertEquals([
 			'a[a][a]',
@@ -84,7 +84,7 @@ class ArraySimpleTest extends TestCase
 		$this->assertEquals([], ArraySimple::keys([]));
 	}
 
-	public function testArraySimpleValue()
+	public function testArraySimpleValue() : void
 	{
 		$this->assertEquals([
 			'a' => [
@@ -129,7 +129,7 @@ class ArraySimpleTest extends TestCase
 		$this->assertNull(ArraySimple::value('z', []));
 	}
 
-	public function testArraySimpleConvert()
+	public function testArraySimpleConvert() : void
 	{
 		$this->assertEquals([
 			'a[a][a]' => 'aaa',
@@ -164,7 +164,7 @@ class ArraySimpleTest extends TestCase
 		$this->assertEquals([], ArraySimple::convert([]));
 	}
 
-	public function testArraySimpleRevert()
+	public function testArraySimpleRevert() : void
 	{
 		$array = [
 			'[a]' => '[a]',
@@ -227,7 +227,7 @@ class ArraySimpleTest extends TestCase
 		$this->assertEquals($array, ArraySimple::revert($array_simple));
 	}
 
-	public function testArraySimpleFiles()
+	public function testArraySimpleFiles() : void
 	{
 		$_FILES = [
 			'party' => [
