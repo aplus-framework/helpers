@@ -1,7 +1,10 @@
-# Array Simple
+# The Framework ArraySimple Library
 
-[![Build](https://travis-ci.org/natanfelles/array-simple.svg)](https://travis-ci.org/natanfelles/array-simple)
-[![Coverage](https://coveralls.io/repos/github/natanfelles/array-simple/badge.svg)](https://coveralls.io/github/natanfelles/array-simple)
+- [Homepage](https://the-framework.gitlab.io/libraries/array-simple.html)
+- [API Documentation](https://the-framework.gitlab.io/libraries/array-simple/docs/)
+
+[![Build](https://gitlab.com/the-framework/libraries/array-simple/badges/master/pipeline.svg)](https://gitlab.com/the-framework/libraries/array-simple/-/jobs)
+[![Coverage](https://gitlab.com/the-framework/libraries/array-simple/badges/master/coverage.svg?job=test:php)](https://the-framework.gitlab.io/libraries/array-simple/coverage/)
 [![Donate](https://img.shields.io/badge/Donate-PayPal-blue.svg)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=NGBNW5PY4VSJ4)
 
 The [ArraySimple](https://github.com/natanfelles/array-simple/blob/master/src/ArraySimple.php) class
