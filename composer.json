@@ -1,5 +1,5 @@
 {
-	"name": "natanfelles/array-simple",
+	"name": "natanfelles/helpers",
 	"type": "library",
 	"description": "The Framework Helpers Library",
 	"keywords": [
@@ -11,7 +11,7 @@
 		"string",
 		"files"
 	],
-	"homepage": "https://the-framework.gitlab.io/libraries/array-simple.html",
+	"homepage": "https://the-framework.gitlab.io/libraries/helpers.html",
 	"license": "MIT",
 	"authors": [
 		{
@@ -51,9 +51,9 @@
 	"prefer-stable": true,
 	"support": {
 		"email": "natanfelles@gmail.com",
-		"issues": "https://gitlab.com/the-framework/libraries/array-simple/issues",
-		"wiki": "https://gitlab.com/the-framework/libraries/array-simple/wikis/home",
-		"source": "https://gitlab.com/the-framework/libraries/array-simple",
-		"docs": "https://the-framework.gitlab.io/libraries/array-simple/docs/"
+		"issues": "https://gitlab.com/the-framework/libraries/helpers/issues",
+		"wiki": "https://gitlab.com/the-framework/libraries/helpers/wikis/home",
+		"source": "https://gitlab.com/the-framework/libraries/helpers",
+		"docs": "https://the-framework.gitlab.io/libraries/helpers/docs/"
 	}
 }
