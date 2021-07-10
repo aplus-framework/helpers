@@ -11,6 +11,9 @@ use PHPUnit\Framework\TestCase;
 
 class ArraySimpleTest extends TestCase
 {
+	/**
+	 * @var array[]
+	 */
 	protected array $array;
 
 	protected function setUp() : void
