@@ -1,6 +1,8 @@
 # Array Simple
 
-[![Build Status](https://travis-ci.org/natanfelles/array-simple.svg)](https://travis-ci.org/natanfelles/array-simple) [![Coverage Status](https://coveralls.io/repos/github/natanfelles/array-simple/badge.svg)](https://coveralls.io/github/natanfelles/array-simple)
+[![Build](https://travis-ci.org/natanfelles/array-simple.svg)](https://travis-ci.org/natanfelles/array-simple)
+[![Coverage](https://coveralls.io/repos/github/natanfelles/array-simple/badge.svg)](https://coveralls.io/github/natanfelles/array-simple)
+[![Donate](https://img.shields.io/badge/Donate-PayPal-blue.svg)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=NGBNW5PY4VSJ4)
 
 The [ArraySimple](https://github.com/natanfelles/array-simple/blob/master/src/ArraySimple.php) class
 contains methods that work with [PHP arrays](https://www.php.net/manual/en/language.types.array.php)
