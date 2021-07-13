@@ -3,8 +3,10 @@
     "type": "library",
     "description": "The Framework Helpers Library",
     "keywords": [
+        "helpers",
         "array-simple",
-        "files"
+        "files",
+        "isolation"
     ],
     "homepage": "https://the-framework.gitlab.io/libraries/helpers.html",
     "license": "MIT",
