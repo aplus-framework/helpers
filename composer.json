@@ -1,14 +1,14 @@
 {
-    "name": "natanfelles/helpers",
+    "name": "aplus/helpers",
     "type": "library",
-    "description": "The Framework Helpers Library",
+    "description": "Aplus Framework Helpers Library",
     "keywords": [
         "helpers",
         "array-simple",
         "files",
         "isolation"
     ],
-    "homepage": "https://the-framework.gitlab.io/libraries/helpers.html",
+    "homepage": "https://aplus-framework.com/docs/helpers",
     "license": "MIT",
     "authors": [
         {
@@ -48,9 +48,9 @@
     "prefer-stable": true,
     "support": {
         "email": "natanfelles@gmail.com",
-        "issues": "https://gitlab.com/the-framework/libraries/helpers/issues",
-        "wiki": "https://gitlab.com/the-framework/libraries/helpers/wikis/home",
-        "source": "https://gitlab.com/the-framework/libraries/helpers",
-        "docs": "https://the-framework.gitlab.io/libraries/helpers/docs/"
+        "issues": "https://gitlab.com/aplus-framework/libraries/helpers/issues",
+        "wiki": "https://gitlab.com/aplus-framework/libraries/helpers/wikis/home",
+        "source": "https://gitlab.com/aplus-framework/libraries/helpers",
+        "docs": "https://aplus-framework.gitlab.io/libraries/helpers/docs/"
     }
 }
