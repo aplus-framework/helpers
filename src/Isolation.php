@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 /*
- * This file is part of The Framework Helpers Library.
+ * This file is part of Aplus Framework Helpers Library.
  *
  * (c) Natan Felles <natanfelles@gmail.com>
  *
