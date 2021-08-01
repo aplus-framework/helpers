@@ -2,7 +2,8 @@ version: "3"
 services:
   package:
     image: natanfelles/package
-    container_name: array-simple-package
+    container_name: helpers-package
     working_dir: /package
     volumes:
       - .:/package
+    tty: true
