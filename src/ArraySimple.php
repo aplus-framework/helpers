@@ -27,31 +27,31 @@ use JetBrains\PhpStorm\Pure;
 class ArraySimple
 {
     /**
-     * @param string $simple_key
+     * @param string $simpleKey
      *
      * @return array<int,string>
      */
-    protected static function extractKeys(string $simple_key) : array
+    protected static function extractKeys(string $simpleKey) : array
     {
-        \preg_match_all('#\[(.*?)\]#', $simple_key, $matches);
+        \preg_match_all('#\[(.*?)\]#', $simpleKey, $matches);
         return $matches[1] ?? [];
     }
 
     /**
      * Reverts an associative array of simple keys to an native array.
      *
-     * @param array<int|string,mixed> $array_simple An array with simple keys
+     * @param array<int|string,mixed> $arraySimple An array with simple keys
      *
      * @return array<string,mixed> An array with their corresponding values
      */
-    public static function revert(array $array_simple) : array
+    public static function revert(array $arraySimple) : array
     {
         $array = [];
-        foreach ($array_simple as $simple_key => $value) {
-            $simple_key = (string) $simple_key;
-            $parent_key = static::getParentKey($simple_key);
-            if ($parent_key === null) {
-                $array[$simple_key] = \is_array($value)
+        foreach ($arraySimple as $simpleKey => $value) {
+            $simpleKey = (string) $simpleKey;
+            $parentKey = static::getParentKey($simpleKey);
+            if ($parentKey === null) {
+                $array[$simpleKey] = \is_array($value)
                     ? static::revert($value)
                     : $value;
                 continue;
@@ -59,7 +59,7 @@ class ArraySimple
             $parent = [];
             static::addChild(
                 $parent,
-                \array_merge([$parent_key], static::extractKeys($simple_key)),
+                \array_merge([$parentKey], static::extractKeys($simpleKey)),
                 $value
             );
             $array = \array_replace_recursive($array, $parent);
@@ -88,20 +88,20 @@ class ArraySimple
     /**
      * Gets the value of an array item through a simple key.
      *
-     * @param string $simple_key A string in the simple key format
+     * @param string $simpleKey A string in the simple key format
      * @param array<int|string,mixed> $array The array to search in
      *
      * @return mixed The item value or null if not found
      */
-    public static function value(string $simple_key, array $array) : mixed
+    public static function value(string $simpleKey, array $array) : mixed
     {
         $array = static::revert($array);
-        $parent_key = static::getParentKey($simple_key);
-        if ($parent_key === null) {
-            return $array[$simple_key] ?? null;
+        $parentKey = static::getParentKey($simpleKey);
+        if ($parentKey === null) {
+            return $array[$simpleKey] ?? null;
         }
-        $value = $array[$parent_key] ?? null;
-        foreach (static::extractKeys($simple_key) as $key) {
+        $value = $array[$parentKey] ?? null;
+        foreach (static::extractKeys($simpleKey) as $key) {
             if ( ! (\is_array($value) && \array_key_exists($key, $value))) {
                 return null;
             }
@@ -126,30 +126,30 @@ class ArraySimple
 
     /**
      * @param array<int|string,mixed> $array
-     * @param string $child_key
+     * @param string $childKey
      *
      * @return array<int,string>
      */
     #[Pure]
-    protected static function getKeys(array $array, string $child_key = '') : array
+    protected static function getKeys(array $array, string $childKey = '') : array
     {
-        $all_keys = [];
+        $allKeys = [];
         foreach ($array as $key => $value) {
             $key = (string) $key;
             if (\is_array($value)) {
-                $all_keys = $child_key === ''
-                    ? \array_merge($all_keys, static::getKeys($value, $key))
+                $allKeys = $childKey === ''
+                    ? \array_merge($allKeys, static::getKeys($value, $key))
                     : \array_merge(
-                        $all_keys,
-                        static::getKeys($value, $child_key . static::getChildKey($key))
+                        $allKeys,
+                        static::getKeys($value, $childKey . static::getChildKey($key))
                     );
                 continue;
             }
-            $all_keys[] = $child_key === ''
+            $allKeys[] = $childKey === ''
                 ? $key
-                : $child_key . static::getChildKey($key);
+                : $childKey . static::getChildKey($key);
         }
-        return $all_keys;
+        return $allKeys;
     }
 
     /**
@@ -172,19 +172,19 @@ class ArraySimple
     #[Pure]
     protected static function getParentKey(string $key) : ?string
     {
-        $pos_open = \strpos($key, '[');
-        $pos_close = $pos_open ? \strpos($key, ']', $pos_open) : false;
-        if ($pos_close === false) {
+        $posOpen = \strpos($key, '[');
+        $posClose = $posOpen ? \strpos($key, ']', $posOpen) : false;
+        if ($posClose === false) {
             return null;
         }
-        return \substr($key, 0, $pos_open); // @phpstan-ignore-line
+        return \substr($key, 0, $posOpen); // @phpstan-ignore-line
     }
 
     #[Pure]
     protected static function getChildKey(string $key) : string
     {
-        $parent_key = static::getParentKey($key);
-        if ($parent_key === null) {
+        $parentKey = static::getParentKey($key);
+        if ($parentKey === null) {
             return '[' . $key . ']';
         }
         $key = \explode('[', $key, 2);
@@ -213,10 +213,10 @@ class ArraySimple
                 $files[$name] = $values;
                 continue;
             }
-            foreach ($values as $info_key => $sub_array) {
+            foreach ($values as $infoKey => $subArray) {
                 $files[$name] = \array_replace_recursive(
                     $files[$name],
-                    static::filesWalker($sub_array, $info_key)
+                    static::filesWalker($subArray, $infoKey)
                 );
             }
         }
@@ -227,21 +227,21 @@ class ArraySimple
      * @see https://stackoverflow.com/a/33261775/6027968
      *
      * @param array<int|string,mixed> $array
-     * @param string $info_key
+     * @param string $infoKey
      *
      * @return array<string,mixed>
      */
     #[Pure]
-    protected static function filesWalker(array $array, string $info_key) : array
+    protected static function filesWalker(array $array, string $infoKey) : array
     {
         $return = [];
         foreach ($array as $key => $value) {
             $key = (string) $key;
             if (\is_array($value)) {
-                $return[$key] = static::filesWalker($value, $info_key);
+                $return[$key] = static::filesWalker($value, $infoKey);
                 continue;
             }
-            $return[$key][$info_key] = $value;
+            $return[$key][$infoKey] = $value;
         }
         return $return;
     }
