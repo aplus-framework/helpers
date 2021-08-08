@@ -23,6 +23,8 @@ use JetBrains\PhpStorm\Pure;
  * `array('user' => ['country' => ['state' => 'rs']])`
  *
  * @see https://www.php.net/manual/en/language.types.array.php
+ *
+ * @package helpers
  */
 class ArraySimple
 {

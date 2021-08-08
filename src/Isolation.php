@@ -11,6 +11,8 @@ namespace Framework\Helpers;
 
 /**
  * Class Isolation.
+ *
+ * @package helpers
  */
 class Isolation
 {
