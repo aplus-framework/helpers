@@ -1,3 +1,5 @@
+<a href="https://gitlab.com/aplus-framework/libraries/helpers"><img src="https://gitlab.com/aplus-framework/libraries/helpers/-/raw/master/guide/image.png" alt="Aplus Framework Helpers Library" align="right" width="100"></a>
+
 # Aplus Framework Helpers Library
 
 - [User Guide](https://docs.aplus-framework.com/guides/libraries/helpers/index.html)
