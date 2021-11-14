@@ -1,6 +1,9 @@
 Helpers
 =======
 
+.. image:: image.png
+    :alt: Aplus Framework Helpers Library
+
 Aplus Framework Helpers Library.
 
 - `Installation`_
