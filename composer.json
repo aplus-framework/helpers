@@ -8,7 +8,7 @@
         "files",
         "isolation"
     ],
-    "homepage": "https://docs.aplus-framework.com/guides/libraries/helpers/",
+    "homepage": "https://aplus-framework.com/packages/helpers",
     "license": "MIT",
     "authors": [
         {
@@ -49,13 +49,13 @@
     "support": {
         "email": "support@aplus-framework.com",
         "issues": "https://gitlab.com/aplus-framework/libraries/helpers/issues",
-        "wiki": "https://gitlab.com/aplus-framework/libraries/helpers/wikis/home",
+        "forum": "https://aplus-framework.com/forum",
         "source": "https://gitlab.com/aplus-framework/libraries/helpers",
         "docs": "https://docs.aplus-framework.com/guides/libraries/helpers/"
     },
     "funding": [
         {
-            "type": "other",
+            "type": "Aplus Sponsor",
             "url": "https://aplus-framework.com/sponsor"
         }
     ]
