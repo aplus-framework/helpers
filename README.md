@@ -2,6 +2,7 @@
 
 # Aplus Framework Helpers Library
 
+- [Homepage](https://aplus-framework.com/packages/helpers)
 - [User Guide](https://docs.aplus-framework.com/guides/libraries/helpers/index.html)
 - [API Documentation](https://docs.aplus-framework.com/packages/helpers.html)
 
