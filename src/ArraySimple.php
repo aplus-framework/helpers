@@ -42,7 +42,7 @@ class ArraySimple
     /**
      * Reverts an associative array of simple keys to an native array.
      *
-     * @param array<int|string,mixed> $arraySimple An array with simple keys
+     * @param array<mixed> $arraySimple An array with simple keys
      *
      * @return array<string,mixed> An array with their corresponding values
      */
@@ -72,7 +72,7 @@ class ArraySimple
     /**
      * Converts an array to an associative array with simple keys.
      *
-     * @param array<int|string,mixed> $array Array to be converted
+     * @param array<mixed> $array Array to be converted
      *
      * @return array<string,mixed> An associative array with the simple keys as
      * keys and their corresponding values
@@ -91,7 +91,7 @@ class ArraySimple
      * Gets the value of an array item through a simple key.
      *
      * @param string $simpleKey A string in the simple key format
-     * @param array<int|string,mixed> $array The array to search in
+     * @param array<mixed> $array The array to search in
      *
      * @return mixed The item value or null if not found
      */
@@ -115,7 +115,7 @@ class ArraySimple
     /**
      * Gets the keys of an array in the simple keys format.
      *
-     * @param array<int|string,mixed> $array The array to get the simple keys
+     * @param array<mixed> $array The array to get the simple keys
      *
      * @return array<int,string> An indexed array containing the simple keys as
      * values
@@ -127,7 +127,7 @@ class ArraySimple
     }
 
     /**
-     * @param array<int|string,mixed> $array
+     * @param array<mixed> $array
      * @param string $childKey
      *
      * @return array<int,string>
@@ -197,8 +197,8 @@ class ArraySimple
     /**
      * Get $_FILES in a re-organized way.
      *
-     * NOTE: Do not use file input names as `name`, `type`, `tmp_name`, `error`
-     * and `size` to avoid overwrite of arrays.
+     * NOTE: Do not use file input names as `name`, `type`, `tmp_name`, `error`,
+     * `full_path` and `size` to avoid overwrite of arrays.
      *
      * @return array<string,mixed> An array ready to be used with
      * {@see ArraySimple::value()}
@@ -228,7 +228,7 @@ class ArraySimple
     /**
      * @see https://stackoverflow.com/a/33261775/6027968
      *
-     * @param array<int|string,mixed> $array
+     * @param array<mixed> $array
      * @param string $infoKey
      *
      * @return array<string,mixed>

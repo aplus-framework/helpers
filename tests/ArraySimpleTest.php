@@ -18,7 +18,7 @@ use PHPUnit\Framework\TestCase;
 final class ArraySimpleTest extends TestCase
 {
     /**
-     * @var array[]
+     * @var array<mixed>
      */
     protected array $array;
 
