@@ -19,9 +19,9 @@
     "homepage": "https://aplus-framework.com/packages/helpers",
     "support": {
         "email": "support@aplus-framework.com",
-        "issues": "https://gitlab.com/aplus-framework/libraries/helpers/issues",
+        "issues": "https://github.com/aplus-framework/helpers/issues",
         "forum": "https://aplus-framework.com/forum",
-        "source": "https://gitlab.com/aplus-framework/libraries/helpers",
+        "source": "https://github.com/aplus-framework/helpers",
         "docs": "https://docs.aplus-framework.com/guides/libraries/helpers/"
     },
     "funding": [
