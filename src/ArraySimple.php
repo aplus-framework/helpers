@@ -104,7 +104,7 @@ class ArraySimple
         }
         $value = $array[$parentKey] ?? null;
         foreach (static::extractKeys($simpleKey) as $key) {
-            if ( ! (\is_array($value) && \array_key_exists($key, $value))) {
+            if (!(\is_array($value) && \array_key_exists($key, $value))) {
                 return null;
             }
             $value = $value[$key];
@@ -208,10 +208,10 @@ class ArraySimple
     {
         $files = [];
         foreach ($_FILES as $name => $values) {
-            if ( ! isset($files[$name])) {
+            if (!isset($files[$name])) {
                 $files[$name] = [];
             }
-            if ( ! \is_array($values['error'])) {
+            if (!\is_array($values['error'])) {
                 $files[$name] = $values;
                 continue;
             }
