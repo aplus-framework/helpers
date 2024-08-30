@@ -36,7 +36,7 @@ class ArraySimple
     protected static function extractKeys(string $simpleKey) : array
     {
         \preg_match_all('#\[(.*?)\]#', $simpleKey, $matches);
-        return $matches[1] ?? [];
+        return $matches[1];
     }
 
     /**
