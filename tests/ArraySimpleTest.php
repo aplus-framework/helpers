@@ -294,7 +294,7 @@ final class ArraySimpleTest extends TestCase
                 'size' => 10663,
             ],
         ];
-        self::assertSame([
+        $output = [
             'party' => [
                 1 => [
                     'aa' => [
@@ -329,6 +329,8 @@ final class ArraySimpleTest extends TestCase
                 'error' => 0,
                 'size' => 10663,
             ],
-        ], ArraySimple::files());
+        ];
+        self::assertSame($output, ArraySimple::files());
+        self::assertSame($output, ArraySimple::files($_FILES));
     }
 }

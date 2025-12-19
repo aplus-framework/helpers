@@ -200,14 +200,17 @@ class ArraySimple
      * NOTE: Do not use file input names as `name`, `type`, `tmp_name`, `error`,
      * `full_path` and `size` to avoid overwrite of arrays.
      *
+     * @param array<mixed>|null $files
+     *
      * @return array<string,mixed> An array ready to be used with
      * {@see ArraySimple::value()}
      */
     #[Pure]
-    public static function files() : array
+    public static function files(?array $files = null) : array
     {
         $output = [];
-        foreach ($_FILES as $name => $values) {
+        $files ??= $_FILES;
+        foreach ($files as $name => $values) {
             if (!isset($output[$name])) {
                 $output[$name] = [];
             }
