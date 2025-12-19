@@ -206,23 +206,23 @@ class ArraySimple
     #[Pure]
     public static function files() : array
     {
-        $files = [];
+        $output = [];
         foreach ($_FILES as $name => $values) {
-            if (!isset($files[$name])) {
-                $files[$name] = [];
+            if (!isset($output[$name])) {
+                $output[$name] = [];
             }
             if (!\is_array($values['error'])) {
-                $files[$name] = $values;
+                $output[$name] = $values;
                 continue;
             }
             foreach ($values as $infoKey => $subArray) {
-                $files[$name] = \array_replace_recursive(
-                    $files[$name],
+                $output[$name] = \array_replace_recursive(
+                    $output[$name],
                     static::filesWalker($subArray, $infoKey)
                 );
             }
         }
-        return $files;
+        return $output;
     }
 
     /**
