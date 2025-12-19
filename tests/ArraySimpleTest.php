@@ -238,7 +238,30 @@ final class ArraySimpleTest extends TestCase
 
     public function testArraySimpleFiles() : void
     {
-        $_FILES = [
+        $_FILES = $this->getFilesInput();
+        self::assertSame($this->getFilesOutput(), ArraySimple::files());
+    }
+
+    public function testArraySimpleFilesEmpty() : void
+    {
+        $_FILES = [];
+        self::assertEmpty(ArraySimple::files());
+    }
+
+    public function testArraySimpleFilesWithArgument() : void
+    {
+        self::assertSame(
+            $this->getFilesOutput(),
+            ArraySimple::files($this->getFilesInput())
+        );
+    }
+
+    /**
+     * @return array<mixed>
+     */
+    protected function getFilesInput() : array
+    {
+        return [
             'party' => [
                 'name' => [
                     1 => [
@@ -294,7 +317,14 @@ final class ArraySimpleTest extends TestCase
                 'size' => 10663,
             ],
         ];
-        $output = [
+    }
+
+    /**
+     * @return array<mixed>
+     */
+    protected function getFilesOutput() : array
+    {
+        return [
             'party' => [
                 1 => [
                     'aa' => [
@@ -330,7 +360,5 @@ final class ArraySimpleTest extends TestCase
                 'size' => 10663,
             ],
         ];
-        self::assertSame($output, ArraySimple::files());
-        self::assertSame($output, ArraySimple::files($_FILES));
     }
 }
