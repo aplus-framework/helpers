@@ -53,7 +53,8 @@ class IsolationTest extends TestCase
 
     public function testIsolationIntoClass() : void
     {
-        $class = new class() {
+        $class = new class()
+        {
             protected string $filename = __DIR__ . '/isolation/into-class.php';
 
             public function test() : string
