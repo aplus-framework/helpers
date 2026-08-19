@@ -155,8 +155,8 @@ class ArraySimple
     }
 
     /**
-     * @param array<int,string> $parent
-     * @param array<int,string> $childs
+     * @param array<mixed> $parent
+     * @param array<mixed> $childs
      * @param mixed $value
      */
     protected static function addChild(array &$parent, array $childs, mixed $value) : void
