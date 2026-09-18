@@ -179,7 +179,7 @@ class ArraySimple
         if ($posClose === false) {
             return null;
         }
-        return \substr($key, 0, $posOpen); // @phpstan-ignore-line
+        return \substr($key, 0, $posOpen);
     }
 
     #[Pure]
