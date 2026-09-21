@@ -9,8 +9,6 @@
  */
 namespace Framework\Helpers;
 
-use JetBrains\PhpStorm\Pure;
-
 /**
  * Class ArraySimple.
  *
@@ -120,7 +118,6 @@ class ArraySimple
      * @return array<int,string> An indexed array containing the simple keys as
      * values
      */
-    #[Pure]
     public static function keys(array $array) : array
     {
         return static::getKeys($array);
@@ -132,7 +129,6 @@ class ArraySimple
      *
      * @return array<int,string>
      */
-    #[Pure]
     protected static function getKeys(array $array, string $childKey = '') : array
     {
         $allKeys = [];
@@ -171,7 +167,6 @@ class ArraySimple
         static::addChild($parent[$key], $childs, $value);
     }
 
-    #[Pure]
     protected static function getParentKey(string $key) : ?string
     {
         $posOpen = \strpos($key, '[');
@@ -182,7 +177,6 @@ class ArraySimple
         return \substr($key, 0, $posOpen);
     }
 
-    #[Pure]
     protected static function getChildKey(string $key) : string
     {
         $parentKey = static::getParentKey($key);
@@ -205,7 +199,6 @@ class ArraySimple
      * @return array<string,mixed> An array ready to be used with
      * {@see ArraySimple::value()}
      */
-    #[Pure]
     public static function files(?array $files = null) : array
     {
         $output = [];
@@ -236,7 +229,6 @@ class ArraySimple
      *
      * @return array<string,mixed>
      */
-    #[Pure]
     protected static function filesWalker(array $array, string $infoKey) : array
     {
         $return = [];
