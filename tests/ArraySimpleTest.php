@@ -93,6 +93,18 @@ final class ArraySimpleTest extends TestCase
         self::assertSame([], ArraySimple::keys([]));
     }
 
+    public function testArraySimpleHasKey() : void
+    {
+        self::assertTrue(ArraySimple::hasKey('a', $this->array));
+        self::assertTrue(ArraySimple::hasKey('a[b]', $this->array));
+        self::assertTrue(ArraySimple::hasKey('b', $this->array));
+        self::assertTrue(ArraySimple::hasKey('a[b][c][c]', $this->array));
+        self::assertTrue(ArraySimple::hasKey('a', $this->array['a']['b']));
+        self::assertFalse(ArraySimple::hasKey('x', $this->array));
+        self::assertFalse(ArraySimple::hasKey('a[c]', $this->array));
+        self::assertFalse(ArraySimple::hasKey('c[b][x]', $this->array));
+    }
+
     public function testArraySimpleValue() : void
     {
         self::assertSame([

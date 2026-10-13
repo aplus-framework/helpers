@@ -124,6 +124,31 @@ class ArraySimple
     }
 
     /**
+     * Checks if a simple key is present in an array.
+     *
+     * @param string $simpleKey A string in the simple key format
+     * @param array<mixed> $array The array to check if the simple key is present
+     *
+     * @return bool True if the array has the simple key, otherwise false
+     */
+    public static function hasKey(string $simpleKey, array $array) : bool
+    {
+        foreach (static::keys($array) as $key) {
+            if (\str_starts_with($key, $simpleKey)) {
+                $keyLength = \strlen($key);
+                $simpleKeyLength = \strlen($simpleKey);
+                if($keyLength === $simpleKeyLength) {
+                    return true;
+                }
+                if ($key[$simpleKeyLength] === '[') {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    /**
      * @param array<mixed> $array
      * @param string $childKey
      *
